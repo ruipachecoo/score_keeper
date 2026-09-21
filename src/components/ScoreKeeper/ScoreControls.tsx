@@ -20,16 +20,21 @@ export function ScoreControls({
   onWinningScoreChange,
 }: ScoreControlsProps) {
   return (
-    <div className="flex flex-col items-center gap-6 w-full">
+    <div className="flex flex-col items-center gap-5 sm:gap-6 w-full">
       <div className="flex items-center gap-3">
-        <label htmlFor="playto" className="text-slate-300">
+        <label htmlFor="playto" className="text-sm sm:text-base text-slate-300">
           Playing to
         </label>
         <select
           id="playto"
           value={winningScore}
           onChange={(e) => onWinningScoreChange(Number(e.target.value))}
-          className="bg-slate-800 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="
+            bg-slate-800 text-white text-sm sm:text-base
+            px-3 py-2 rounded-lg border border-slate-600
+            focus:outline-none focus:ring-2 focus:ring-blue-500
+            transition-colors
+          "
         >
           {WINNING_SCORE_OPTIONS.map((option) => (
             <option key={option} value={option}>
@@ -39,13 +44,22 @@ export function ScoreControls({
         </select>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
         {players.map((player) => (
           <button
             key={player.id}
             onClick={() => onIncrement(player.id)}
             disabled={isGameOver}
-            className="px-4 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
+            className="
+              px-4 py-3
+              bg-blue-500 hover:bg-blue-600
+              active:scale-95
+              disabled:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50
+              disabled:active:scale-100
+              text-white text-sm sm:text-base font-semibold
+              rounded-lg
+              transition-all duration-150
+            "
           >
             +1 {player.name}
           </button>
@@ -54,7 +68,14 @@ export function ScoreControls({
 
       <button
         onClick={onReset}
-        className="px-4 py-3 w-full bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors"
+        className="
+          px-4 py-3 w-full
+          bg-red-500 hover:bg-red-600
+          active:scale-95
+          text-white text-sm sm:text-base font-semibold
+          rounded-lg
+          transition-all duration-150
+        "
       >
         Reset
       </button>
